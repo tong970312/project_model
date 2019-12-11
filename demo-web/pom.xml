@@ -30,10 +30,16 @@
             <artifactId>demo-biz</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>demo-dao</artifactId>
+        </dependency>
+
+        <!--自定义bean属性配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

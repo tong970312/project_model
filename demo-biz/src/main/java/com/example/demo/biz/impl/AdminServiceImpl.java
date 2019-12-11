@@ -13,7 +13,9 @@ public class AdminServiceImpl  implements AdminService {
     UserRepository userRepository;
 
     @Override
-    public User print() {
-        return userRepository.selectByPrimaryKey(1);
+    public User print(User user) {
+//        userRepository.insertUser(user);
+        return userRepository.findUser(1);
+//        return null;
     }
 }

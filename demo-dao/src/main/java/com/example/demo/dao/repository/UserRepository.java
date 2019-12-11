@@ -3,7 +3,10 @@ package com.example.demo.dao.repository;
 import com.example.demo.dao.entity.User;
 import com.example.demo.dao.entity.UserExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface UserRepository {
     /**
@@ -93,4 +96,13 @@ public interface UserRepository {
      * @mbg.generated Mon Dec 09 17:52:47 CST 2019
      */
     int updateByPrimaryKey(User record);
+
+
+    @Select("select * from user where id = #{id}")
+    User findUser(@Param("id") Integer id);
+
+    @Insert("insert into user(name,password,phone,email) values(#{name},#{password},#{phone},#{email})")
+    int insertUser(User user);
+
+
 }
