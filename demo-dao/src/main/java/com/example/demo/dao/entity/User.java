@@ -1,6 +1,17 @@
 package com.example.demo.dao.entity;
 
 public class User {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public User(Integer id, String name, String password, String phone, String email) {
         this.id = id;
         this.name = name;

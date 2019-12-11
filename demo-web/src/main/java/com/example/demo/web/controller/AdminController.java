@@ -24,8 +24,7 @@ public class AdminController {
 
     @GetMapping("/get")
     public User get(){
-        User user = new User(null,"litong111","123456","18522531485","18522531485@163.com");
-        return adminService.print(user);
+        return adminService.print();
     }
 
 
