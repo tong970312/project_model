@@ -1,7 +1,7 @@
 
 ### 多模块项目搭建
 ### 问题汇总
--
+----------------------------------------------------
 1、java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
 > 解决:时区问题,在配置数据库的url后面加上 serverTimezone=GMT%2B8
  
@@ -30,8 +30,7 @@
            private final UserService userService;
        
        }
-> ######~循环依赖：
-详情[理解Spring循环引用（循环依赖](https://blog.csdn.net/chen2526264/article/details/80673598)
+> ~循环依赖：详情[理解Spring循环引用（循环依赖](https://blog.csdn.net/chen2526264/article/details/80673598)
 
     假设 通过依赖注入的方式,A依赖B,B又依赖了A,在Spring容器中A、B就存在循环依赖 
     (前提了解Spring依赖注入方式、Spring的bean的作用域、Spring延迟加载)
