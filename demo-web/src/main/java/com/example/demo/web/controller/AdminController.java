@@ -1,9 +1,10 @@
 package com.example.demo.web.controller;
 
 import com.example.demo.biz.AdminService;
-import com.example.demo.dao.entity.User;
+import com.example.demo.dao.entity.UserInfo;
 import com.example.demo.testBean.TestBean;
 import com.util.RedisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServlet;
-
+@Slf4j
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/login")
 public class AdminController {
 
 
@@ -28,11 +28,12 @@ public class AdminController {
 
     @Resource
     RedisUtil redisUtil;
-
-    @GetMapping("/get")
-    public User get(){
-        User user = adminService.print();
-        redisUtil.set(user.getName(),user.getPassword()+","+user.getPhone());
+    @GetMapping(value = "/get")
+    public UserInfo get(){
+        UserInfo user  = adminService.print();
+       // redisUtil.set(user.getUserName(),user.getPassword()+","+user.getEmail());
+       // Object o  =redisUtil.get(user.getUserName());
+       // System.out.println(o);
         return user;
     }
 

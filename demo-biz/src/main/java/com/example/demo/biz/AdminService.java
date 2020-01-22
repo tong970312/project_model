@@ -1,7 +1,7 @@
 package com.example.demo.biz;
 
-import com.example.demo.dao.entity.User;
+import com.example.demo.dao.entity.UserInfo;
 
 public interface AdminService {
-    User print();
+    UserInfo print();
 }

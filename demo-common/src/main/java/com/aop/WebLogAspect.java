@@ -1,4 +1,4 @@
-package com.example.demo.web.aop;
+package com.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -12,10 +12,17 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 /**
  * 定义切面类，实现web层的日志切面
+ *  aspect 能获取处理请求的controller,method,请求参数，
+ *  但是不能获取原始的request,response
+ *  执行顺序：
+ *  filter->interceptor->aspect->controller
+ *  如果controller抛出异常
+ *  最先捕获的是aspect、（如果存在）@controllerAdvice、interceptor(afterHandle)
+ *  最后是filter
+ *
  */
 @Component //交给Spring容器管理
 @Aspect //标注其为切面类
@@ -51,7 +58,9 @@ public class WebLogAspect {
         //输出当前调用的方法
         //logger.info("CLASS_METHOD : " + joinPoint.getSignature().getName());
         //完整路径
-        logger.info("CLASS_METHOD -- BEGIN : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+//        logger.info("CLASS_METHOD -- BEGIN : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.info("CLASS_METHOD --  BEGIN :  " + joinPoint.getSignature().getDeclaringTypeName().substring(joinPoint.getSignature().getDeclaringTypeName().indexOf("controller")) + "." + joinPoint.getSignature().getName());
+
         //返回结果参数
         //logger.info("PARAMS : " + Arrays.toString(joinPoint.getArgs()));
 //        String allName = joinPoint.getSignature().getDeclaringTypeName();
@@ -67,7 +76,8 @@ public class WebLogAspect {
     @AfterReturning(returning = "ret",pointcut = "aspectLog()")
     public void doAfterReturning(JoinPoint joinPoint,Object ret) throws Throwable{
 
-        logger.info("CLASS_METHOD --  END :  " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+//        logger.info("CLASS_METHOD --  END :  " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.info("CLASS_METHOD --  END :  " + joinPoint.getSignature().getDeclaringTypeName().substring(joinPoint.getSignature().getDeclaringTypeName().indexOf("controller")) + "." + joinPoint.getSignature().getName());
 //        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getName() +"调用结束");
         // 处理完请求，返回内容
       //  logger.info("RESPONSE : " + ret);
